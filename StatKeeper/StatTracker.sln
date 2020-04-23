@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30011.22
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StatTracker", "StatTracker.csproj", "{3D863C41-966B-4259-A540-91DE32B3C13D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StatKeeper", "StatKeeper.csproj", "{3D863C41-966B-4259-A540-91DE32B3C13D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

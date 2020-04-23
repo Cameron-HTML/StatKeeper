@@ -1,7 +1,7 @@
 ﻿using Rocket.API;
 using System;
 
-namespace Batt.StatTracker {
+namespace Batt.StatKeeper {
     public class Stats : IDefaultable {
         public ulong SteamID { get; set; } = 0;
         public DateTime LastUpdated { get; set; } = DateTime.Now;

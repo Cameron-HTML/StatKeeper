@@ -3,11 +3,11 @@ using Rocket.Unturned.Player;
 using SDG.Unturned;
 using System.IO;
 
-namespace Batt.StatTracker {
+namespace Batt.StatKeeper {
     public class StatsPlayerComponent : UnturnedPlayerComponent {
         public XMLFileAsset<Stats> Stats;
         public void Start() {
-            Stats = new XMLFileAsset<StatTracker.Stats>(Path.Combine(Plugin.Instance.Directory,"Stats/"+Player.Id+".xml"));
+            Stats = new XMLFileAsset<StatKeeper.Stats>(Path.Combine(Plugin.Instance.Directory,"Stats/"+Player.Id+".xml"));
             Stats.Instance.SteamID = (ulong)Player.CSteamID;
 
             //TODO: Add tracking of acc when player is in combat

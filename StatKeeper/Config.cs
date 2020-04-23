@@ -1,6 +1,6 @@
 ﻿using Rocket.API;
 
-namespace Batt.StatTracker {
+namespace Batt.StatKeeper {
 	public class Configuration : IRocketPluginConfiguration {
 		public void LoadDefaults() {
 

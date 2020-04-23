@@ -10,7 +10,7 @@ using SDG.Unturned;
 using Steamworks;
 using System.Xml;
 
-namespace Batt.StatTracker {
+namespace Batt.StatKeeper {
 	public class Plugin : RocketPlugin<Configuration> {
 		public static Plugin Instance;
 		List<string> onlinePlayers = new List<string>();
@@ -21,7 +21,7 @@ namespace Batt.StatTracker {
 
 		protected override void Load() {
 			Instance = this;
-			Logger.Log("StatTracker has been loaded!", ConsoleColor.White);
+			Logger.Log("StatKeeper has been loaded!", ConsoleColor.White);
 			System.IO.Directory.CreateDirectory(Path.Combine(Directory, "Stats/"));
 
 			U.Events.OnPlayerConnected += EventOnPlayerConnected;
@@ -35,7 +35,7 @@ namespace Batt.StatTracker {
 		}
 
 		public void UpdateStats(UnturnedPlayer player) {
-			XMLFileAsset<Stats> PlayerStats = new XMLFileAsset<StatTracker.Stats>(Path.Combine(Instance.Directory, "Stats/" + player.CSteamID + ".xml"));
+			XMLFileAsset<Stats> PlayerStats = new XMLFileAsset<StatKeeper.Stats>(Path.Combine(Instance.Directory, "Stats/" + player.CSteamID + ".xml"));
 
 			EffectManager.sendUIEffect((ushort)9879, (short)9884, player.CSteamID, true, PlayerStats.Instance.Rank.ToString());
 			EffectManager.sendUIEffect((ushort)9880, (short)9885, player.CSteamID, true, PlayerStats.Instance.Kills.ToString());
@@ -102,7 +102,7 @@ namespace Batt.StatTracker {
 			}
 
 			for (int i = 0; i < RankList.Count; i++) {
-				XMLFileAsset<Stats> PlayerStats = new XMLFileAsset<StatTracker.Stats>(Path.Combine(Instance.Directory, "Stats/" + RankList[i] + ".xml"));
+				XMLFileAsset<Stats> PlayerStats = new XMLFileAsset<StatKeeper.Stats>(Path.Combine(Instance.Directory, "Stats/" + RankList[i] + ".xml"));
 
 				PlayerStats.Instance.Rank = i + 1;
 				PlayerStats.Save();
