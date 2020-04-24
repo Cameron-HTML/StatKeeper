@@ -13,7 +13,6 @@ using System.Xml;
 namespace Batt.StatKeeper {
 	public class Plugin : RocketPlugin<Configuration> {
 		public static Plugin Instance;
-		List<string> onlinePlayers = new List<string>();
 
 		public List<string> Aliases {
 			get { return new List<string> { "stats" }; }
@@ -30,8 +29,6 @@ namespace Batt.StatKeeper {
 
 		private void EventOnPlayerConnected(UnturnedPlayer player) {
 			UpdateStats(player);
-
-			onlinePlayers.Add(player.CSteamID.ToString());
 		}
 
 		public void UpdateStats(UnturnedPlayer player) {
@@ -109,11 +106,10 @@ namespace Batt.StatKeeper {
 			}
 
 			// Find way to sort through players without adding their ID to a list
-			for(int i = 0; i < onlinePlayers.Count; i++) {
-				CSteamID cSteamID = (CSteamID)Convert.ToUInt64(onlinePlayers[i]);
-				UnturnedPlayer player = UnturnedPlayer.FromCSteamID(cSteamID);
+			foreach(SteamPlayer player in Provider.clients) {
+				UnturnedPlayer uPlayer = UnturnedPlayer.FromCSteamID(player.playerID.steamID);
 
-				UpdateStats(player);
+				UpdateStats(uPlayer);
 			}
 		}
 
@@ -123,13 +119,6 @@ namespace Batt.StatKeeper {
 			EffectManager.askEffectClearByID((ushort)9881, player.CSteamID);
 			EffectManager.askEffectClearByID((ushort)9882, player.CSteamID);
 			EffectManager.askEffectClearByID((ushort)9883, player.CSteamID);
-
-			for(int i = 0; i < onlinePlayers.Count; i++) {
-				if(player.CSteamID.ToString() == onlinePlayers[i]) {
-					onlinePlayers.RemoveAt(i);
-					i = onlinePlayers.Count;
-				}
-			}
 		}
 
 		protected override void Unload() {
